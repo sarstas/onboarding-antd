@@ -65,5 +65,6 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "onboarding-antd"
+  "defaultProject": "onboarding-antd",
+  "nxCloudAccessToken": "MmJhNzM4YzktYmIwOS00YjMxLThhNzAtYzgwY2MyMGNhOGEwfHJlYWQtd3JpdGU="
 }
