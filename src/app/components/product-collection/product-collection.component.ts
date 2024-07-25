@@ -92,7 +92,7 @@ export class ProductCollectionComponent implements OnDestroy {
     input.value = this.getFormattedPrice(index);
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
     if (this.productForm.valid) {
       console.log(this.productForm.value);
@@ -103,22 +103,20 @@ export class ProductCollectionComponent implements OnDestroy {
     }
   }
 
-  private _disableSubmitButton() {
+  private _disableSubmitButton(): void {
     this.isSubmitDisabled = true;
     this.remainingTime = 60;
 
-    timer(60000)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.isSubmitDisabled = false;
-        this.remainingTime = 0;
-      });
-
-    interval(1000)
+    timer(0, 1000)
       .pipe(
         takeUntil(this.destroy$),
-        takeUntil(timer(60000)),
-        tap(() => this.remainingTime--)
+        takeUntil(timer(60000 + 1000)),
+        tap(value => {
+          this.remainingTime = 60 - value;
+          if (this.remainingTime <= 0) {
+            this.isSubmitDisabled = false;
+          }
+        })
       )
       .subscribe();
   }

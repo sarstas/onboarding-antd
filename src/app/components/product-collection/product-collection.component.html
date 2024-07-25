@@ -5,7 +5,7 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzFor="name">Name</nz-form-label>
           <nz-form-control [nzSpan]="14" nzErrorTip="Please input your name!">
-            <input nz-input name="name" type="text" id="name" />
+            <input nz-input name="name" type="text" id="name" formControlName="name"/>
           </nz-form-control>
         </nz-form-item>
 
@@ -15,6 +15,7 @@
             <input nz-input name="price" type="text" id="price"
                    [value]="getFormattedPrice(i)"
                    (input)="onPriceInput($event, i)"
+                   formControlName="price"
             />
           </nz-form-control>
         </nz-form-item>
