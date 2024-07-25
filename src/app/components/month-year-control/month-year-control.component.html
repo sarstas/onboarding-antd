@@ -1,0 +1,13 @@
+<nz-form-item>
+  <nz-form-label [nzSpan]="0" nzFor="totalMonths">Total Months</nz-form-label>
+  <nz-form-control [nzSpan]="0">
+    <input nz-input name="totalMonths" type="text" [formControl]="totalMonthsControl" />
+  </nz-form-control>
+</nz-form-item>
+{{ totalMonthsControlValue }}
+<div class=''>
+      <span>
+        Years: {{ totalMonthsControlValue / 12 | number: '1.0-0' }}
+      </span>
+  <span>Months: {{ totalMonthsControlValue % 12 }}</span>
+</div>

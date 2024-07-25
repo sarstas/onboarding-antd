@@ -1,0 +1,44 @@
+<form nz-form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+  <div formArrayName="products">
+    <div *ngFor="let product of products.controls; let i=index" >
+      <div [formGroupName]="i">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="name">Name</nz-form-label>
+          <nz-form-control [nzSpan]="14" nzErrorTip="Please input your name!">
+            <input nz-input name="name" type="text" id="name" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="price">Price</nz-form-label>
+          <nz-form-control [nzSpan]="14" nzErrorTip="Please input your price!">
+            <input nz-input name="price" type="text" id="price"
+                   [value]="getFormattedPrice(i)"
+                   (input)="onPriceInput($event, i)"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control [nzSpan]="14">
+            <app-month-year-control id="duration" formControlName="duration" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button nzType="default" nzDanger type="button" (click)="removeProduct(i)" class="">Remove</button>
+
+        <nz-divider *ngIf="products.controls.length > 1"/>
+      </div>
+    </div>
+  </div>
+
+  <nz-divider *ngIf="products.controls.length === 1"/>
+
+  <button nz-button nzType="primary" [nzSize]="'default'" nzShape="round" type="button" (click)="addProduct()">
+    Add Product
+  </button>
+
+  <button nz-button nzType="primary"  type="submit"  [disabled]="isSubmitDisabled || productForm.invalid" class="">Submit</button>
+
+  <div *ngIf="isSubmitDisabled" class="">Please wait {{ remainingTime }} seconds before submitting again.</div>
+</form>
