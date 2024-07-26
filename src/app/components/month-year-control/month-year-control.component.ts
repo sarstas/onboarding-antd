@@ -1,9 +1,7 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormBuilder,
   FormControl,
-  FormGroup,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -39,7 +37,7 @@ export class MonthYearControlComponent implements ControlValueAccessor, OnInit {
 
   public totalMonthsControl: FormControl<number> = new FormControl();
 
-  get totalMonthsControlValue(): number{
+  get totalMonthsControlValue(): number {
     return this.totalMonthsControl.getRawValue();
   }
 
@@ -68,8 +66,8 @@ export class MonthYearControlComponent implements ControlValueAccessor, OnInit {
   public setDisabledState?(isDisabled: boolean): void {
   }
 
-  private onChange = (value: number) => {
+  private onChange = (value: number): void=> {
   };
-  private onTouched = () => {
+  private onTouched = (): void => {
   };
 }
