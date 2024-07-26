@@ -44,7 +44,7 @@ export class MonthYearControlComponent implements ControlValueAccessor, OnInit {
   constructor() {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.totalMonthsControl?.valueChanges.subscribe(value => {
       this.onChange(value);
       this.onTouched();

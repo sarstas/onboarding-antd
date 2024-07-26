@@ -58,7 +58,7 @@ export class ProductCollectionComponent implements OnDestroy {
     return this.productForm.get('products') as FormArray;
   }
 
-  public addProduct() {
+  public addProduct(): void {
     const productGroup = this.fb.group({
       name: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
@@ -68,7 +68,7 @@ export class ProductCollectionComponent implements OnDestroy {
     this.products.push(productGroup);
   }
 
-  public removeProduct(index: number) {
+  public removeProduct(index: number): void {
     this.products.removeAt(index);
   }
 
@@ -105,14 +105,14 @@ export class ProductCollectionComponent implements OnDestroy {
 
   private _disableSubmitButton(): void {
     this.isSubmitDisabled = true;
-    this.remainingTime = 60;
+    this.remainingTime = 70;
 
     timer(0, 1000)
       .pipe(
         takeUntil(this.destroy$),
-        takeUntil(timer(60000 + 1000)),
+        takeUntil(timer(this.remainingTime * 1000 + 1000)),
         tap(value => {
-          this.remainingTime = 60 - value;
+          this.remainingTime = this.remainingTime - value;
           if (this.remainingTime <= 0) {
             this.isSubmitDisabled = false;
           }
@@ -121,7 +121,7 @@ export class ProductCollectionComponent implements OnDestroy {
       .subscribe();
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
